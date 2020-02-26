@@ -1,0 +1,16 @@
+{
+  "name": "blab",
+  "version": "1.0.0",
+  "description": "Blab private server chat app",
+  "main": "index.js",
+  "scripts": {
+    "serve": "concurrently \"cd ./blab-ui && yarn serve\" \"cd ./blab-api && yarn serve\"",
+    "postinstall": "concurrently \"cd ./blab-ui && yarn install --check-files\" \"cd ./blab-api && yarn install --check-files\""
+  },
+  "repository": "https://github.com/jccdev/blab.git",
+  "author": "jccdev <jcastillodev@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "5.1.0"
+  }
+}

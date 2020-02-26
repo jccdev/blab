@@ -1,12 +1,14 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
+    <div v-for="n in 1000" :key="n">
+      <h2>Element: {{n}}</h2>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import { ClientState } from '../../../shared/models/client-state';
 import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({

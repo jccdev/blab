@@ -1,43 +1,36 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <router-link to="/home" class="navbar-brand col-sm-3 col-md-2 mr-0">Blab</router-link>
-      <!-- <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#" disabled>Sign out</a>
-        </li>
-      </ul> -->
-    </nav>
-
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <!-- <a class="nav-link active" href="#"> -->
-                <router-link to="/home" class="nav-link" active-class="active">Home</router-link> 
-              </li>
-              <li class="nav-item">
-                <!-- <a class="nav-link active" href="#"> -->
-                <router-link to="/about" class="nav-link" active-class="active">About</router-link>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-          <router-view /> 
-        </main>
-      </div>
-    </div>
+    <router-view />
   </div>
 </template>
+
+<script>
+import { defineComponent, onUnmounted } from "@vue/composition-api";
+import store from '@/store'
+import router from '@/router';
+
+export default defineComponent({
+  setup() {
+    const unsubscribe = store.subscribe(( mutation, state ) => {
+      if ( mutation.type === 'setAuth' && state.isAuthenticated === false ) {
+        router.push( { name: '/login' } );
+      }
+    });
+
+    onUnmounted(() => {
+      unsubscribe();
+    });
+    return { }
+  }
+});
+</script>
 
 <style lang="scss">
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-vue/src/index.scss';
+body, html, #app{
+  height: 100%;
+}
 
 body {
   font-size: .875rem;
