@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, onUnmounted } from "@vue/composition-api";
 import store from '@/store'
 import router from '@/router';

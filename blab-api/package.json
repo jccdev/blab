@@ -2,10 +2,10 @@
   "name": "blab-api",
   "version": "1.0.0",
   "description": "Api for blab",
-  "main": "build/dist/app.js",
+  "main": "build/dist/blab-api/src/app.js",
   "scripts": {
     "serve": "yarn run clean && yarn run build-ts && concurrently \"yarn run watch-ts\" \"yarn run watch-node\"",
-    "watch-node": "nodemon ./build/dist/app.js",
+    "watch-node": "nodemon --inspect ./build/dist/blab-api/src/app.js",
     "watch-ts": "tsc -w",
     "build-ts": "tsc",
     "migrate-create": "migrate create --compiler \"ts:./migrate/migrate-ts-compiler.js\" -e \".ts\" -t \"./migrate/template.ts\"",

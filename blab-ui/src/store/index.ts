@@ -1,7 +1,9 @@
+import { AuthForm } from '../shared/models/auth-form';
 import Vue from 'vue';
 import Vuex, { Action, Mutation, GetterTree, Getter } from 'vuex';
 import { ClientState } from './client-state';
 import router from '@/router';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
@@ -15,9 +17,9 @@ const getters: GetterTree<ClientState, ClientState> = {
   isAuthenticated
 };
 
-const authenticate: Action<ClientState, ClientState> = async ({ commit }, path: string) => {
+const authenticate: Action<ClientState, ClientState> = async ({ commit }, form: AuthForm) => {
+  const result = await axios.post('http://localhost:3000/auth', form);
   commit('setAuth', true);
-  return true;
 };
 
 const logout: Action<ClientState, ClientState> = async ({ commit }) => {

@@ -13,8 +13,7 @@
     "baseUrl": ".",
     "types": ["webpack-env", "mocha", "chai"],
     "paths": {
-      "@/*": ["src/*"],
-      "shared/*": ["../blab-api/src/shared/*"]
+      "@/*": ["src/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
