@@ -1,3 +1,3 @@
-import tsNode from 'ts-node';
+const tsNode = require('ts-node'); // eslint-disable-line
 
 module.exports = tsNode.register;

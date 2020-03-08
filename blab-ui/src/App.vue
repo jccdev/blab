@@ -26,6 +26,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+@import './assets/_overrides.scss';
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-vue/src/index.scss';
 body, html, #app{

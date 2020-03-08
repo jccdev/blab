@@ -5,8 +5,8 @@
   "main": "build/dist/blab-api/src/app.js",
   "scripts": {
     "serve": "yarn run clean && yarn run build-ts && concurrently \"yarn run watch-ts\" \"yarn run watch-node\"",
-    "watch-node": "nodemon --inspect ./build/dist/blab-api/src/app.js",
-    "watch-ts": "tsc -w",
+    "watch-node": "nodemon --inspect --inspect-brk ./build/dist/blab-api/src/app.js",
+    "watch-ts": "tsc -w --sourceMap",
     "build-ts": "tsc",
     "migrate-create": "migrate create --compiler \"ts:./migrate/migrate-ts-compiler.js\" -e \".ts\" -t \"./migrate/template.ts\"",
     "migrate-up": "migrate up --compiler \"ts:./migrate/migrate-ts-compiler.js\"",
@@ -16,20 +16,22 @@
   "author": "jccdev",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5",
+    "body-parser": "1.19.0",
+    "cors": "2.8.5",
     "express": "4.17.1",
     "migrate": "1.6.2",
     "mongodb": "3.5.3",
     "ts-node": "8.6.2",
-    "typescript": "3.8.2"
+    "typescript": "3.8.2",
+    "uuid": "^7.0.2"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.19.0",
-    "@types/cors": "^2.8.6",
+    "@types/body-parser": "1.19.0",
+    "@types/cors": "2.8.6",
     "@types/express": "4.17.2",
     "@types/mongodb": "3.3.16",
     "@types/node": "12.12.6",
+    "@types/uuid": "^7.0.0",
     "@typescript-eslint/eslint-plugin": "2.20.0",
     "@typescript-eslint/parser": "2.20.0",
     "concurrently": "5.1.0",

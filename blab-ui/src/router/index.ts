@@ -2,20 +2,26 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import store from '@/store';
-import Login from '@/components/Login.vue';
-import Dashboard from '@/components/Dashboard.vue';
+import BlabSignIn from '@/components/BlabSignIn.vue';
+import BlabDashboard from '@/components/BlabDashboard.vue';
+import BlabSignUp from '@/components/BlabSignUp.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/login',
-    name: 'Login',
-    component: Login
+    path: '/sign-in',
+    name: 'BlabSignIn',
+    component: BlabSignIn
+  },
+  {
+    path: '/sign-up',
+    name: 'BlabSignUp',
+    component: BlabSignUp
   },
   {
     path: '/',
-    component: Dashboard,
+    component: BlabDashboard,
     children: [
       {
         path: '',
@@ -36,7 +42,7 @@ const routes = [
           import(/* webpackChunkName: "about" */ '../views/About.vue')
       }
     ]
-  },
+  }
 ];
 
 const router = new VueRouter({
@@ -45,20 +51,20 @@ const router = new VueRouter({
   routes
 });
 
-const authRoutes = [ '/login' ];
+const authRoutes = ['/sign-in', '/sign-up'];
 
 router.beforeEach((to, from, next) => {
   if (authRoutes.find(x => x === to.fullPath)) {
-    if(store.getters.isAuthenticated) {
-      next('/')
+    if (store.getters.isAuthenticated) {
+      next('/');
     } else {
       next();
     }
   } else {
-    if(store.getters.isAuthenticated) {
-      next()
+    if (store.getters.isAuthenticated) {
+      next();
     } else {
-      next('login');
+      next('sign-in');
     }
   }
 });
