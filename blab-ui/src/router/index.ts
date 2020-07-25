@@ -53,20 +53,21 @@ const router = new VueRouter({
 
 const authRoutes = ['/sign-in', '/sign-up'];
 
-router.beforeEach((to, from, next) => {
-  if (authRoutes.find(x => x === to.fullPath)) {
-    if (store.getters.isAuthenticated) {
-      next('/');
-    } else {
-      next();
-    }
-  } else {
-    if (store.getters.isAuthenticated) {
-      next();
-    } else {
-      next('sign-in');
-    }
-  }
-});
+// TODO IMPLEMENT AUTH
+// router.beforeEach((to, from, next) => {
+//   if (authRoutes.find(x => x === to.fullPath)) {
+//     if (store.getters.isAuthenticated) {
+//       next('/');
+//     } else {
+//       next();
+//     }
+//   } else {
+//     if (store.getters.isAuthenticated) {
+//       next();
+//     } else {
+//       next('sign-in');
+//     }
+//   }
+// });
 
 export default router;

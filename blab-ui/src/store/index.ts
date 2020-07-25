@@ -7,13 +7,34 @@ import { ClientState } from '@/shared/models/client-state';
 import router from '@/router';
 import axios from 'axios';
 import { SignUpResponse } from '@/shared/models/sign-up-response';
+import { Channel } from '@/shared/models/channel';
+import { ChannelFolder } from "@/shared/models/channel-folder";
 
 Vue.use(Vuex);
 
 const state: ClientState = {
   isAuthenticated: false,
   authUser: null,
-  signUpResponse: null
+  signUpResponse: null,
+  channel_detail: [
+    new Channel({name: "welcome"}),
+    new ChannelFolder({
+      name: "general",
+      channels: [
+        new Channel({name: "general"}),
+        new Channel({name: "current-events"}),
+        new Channel({name: "meetups"}),
+      ]
+    }),
+    new ChannelFolder({
+      name: "entertainment",
+      channels: [
+        new Channel({name: "games"}),
+        new Channel({name: "music"}),
+        new Channel({name: "movies-and-tv"}),
+      ]
+    }),
+  ]
 };
 
 const isAuthenticated: Getter<ClientState, ClientState> = state =>
