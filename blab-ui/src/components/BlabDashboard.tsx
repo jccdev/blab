@@ -1,7 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {
+  NavLink,
+  Switch,
+  Route,
+  useRouteMatch,
+  Redirect,
+} from "react-router-dom";
 import { Channel } from "../shared/models/channel";
 import { ChannelFolder } from "../shared/models/channel-folder";
+import BlabChannel from "./BlabChannel";
 
 const channelDetails = [
   new Channel({ name: "welcome" }),
@@ -23,12 +30,16 @@ const channelDetails = [
   }),
 ];
 
-const renderChannels = () => {
+const renderChannels = (url: string) => {
   return channelDetails.map((item, ix) => {
     if (item instanceof Channel) {
       return (
         <li className="nav-item" key={ix}>
-          <NavLink to="/channel" className="nav-link" activeClassName="active">
+          <NavLink
+            to={`${url}channel/${item.name}`}
+            className="nav-link"
+            activeClassName="active"
+          >
             <i className="fas fa-hashtag" />
             {item.name}
           </NavLink>
@@ -38,20 +49,20 @@ const renderChannels = () => {
     if (item instanceof ChannelFolder) {
       return (
         <li className="nav-item" key={ix}>
-          <NavLink to="/channel" className="nav-link" activeClassName="active">
+          <a className="nav-link">
             {item.expanded ? (
               <i className="fas fa-caret-right" />
             ) : (
               <i className="fas fa-caret-down" />
             )}
             {item.name}
-          </NavLink>
+          </a>
           <ul className="nav flex-column" v-if="item.expanded">
             {item.channels.map((innerChannel, ix) => {
               return (
                 <li className="nav-item" key={ix}>
                   <NavLink
-                    to="/channel"
+                    to={`${url}channel/${innerChannel.name}`}
                     className="nav-link"
                     activeClassName="active"
                   >
@@ -70,6 +81,7 @@ const renderChannels = () => {
 };
 
 function BlabDashboard(): JSX.Element {
+  const { path, url } = useRouteMatch();
   return (
     <div>
       <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -96,13 +108,10 @@ function BlabDashboard(): JSX.Element {
           <nav className="col-md-2 d-none d-md-block bg-light sidebar">
             <div className="sidebar-sticky">
               <ul className="nav flex-column">
-                {renderChannels()}
-                {/* <template v-for="(item, i) in channels">
-                  
-                </template> */}
+                {renderChannels(url)}
                 <li className="nav-item">
                   <NavLink
-                    to="/home"
+                    to={`${url}home`}
                     className="nav-link"
                     activeClassName="active"
                   >
@@ -121,10 +130,17 @@ function BlabDashboard(): JSX.Element {
               </ul>
             </div>
           </nav>
-          <main
-            role="main"
-            className="col-md-9 ml-sm-auto col-lg-10 px-4"
-          ></main>
+          <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <Switch>
+              <Route exact path={`${path}channel/:name`}>
+                <BlabChannel />
+              </Route>
+              <Route exact path={path}>
+                <h4>Default</h4>
+              </Route>
+              <Redirect to="/not-found" />
+            </Switch>
+          </main>
         </div>
       </div>
     </div>
