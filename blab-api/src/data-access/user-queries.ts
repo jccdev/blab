@@ -1,5 +1,5 @@
 import { DbFactory } from './db-factory';
-import { AuthForm } from 'shared/models/auth-form';
+import { AuthForm } from '../../../blab-shared/src/models/auth-form';
 
 export class UserQueries {
   async getUser(userName: string): Promise<User> {

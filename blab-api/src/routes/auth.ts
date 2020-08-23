@@ -1,5 +1,5 @@
-import { AuthForm } from 'shared/models/auth-form';
-import { SignUpForm } from 'shared/models/sign-up-form';
+import { AuthForm } from '../../../blab-shared/src/models/auth-form';
+import { SignUpForm } from '../../../blab-shared/src/models/sign-up-form';
 import express from 'express';
 import { asyncHandler } from "../async-handler";
 import { AuthService } from '../services/auth-service';

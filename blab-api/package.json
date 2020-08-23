@@ -2,16 +2,16 @@
   "name": "blab-api",
   "version": "1.0.0",
   "description": "Api for blab",
-  "main": "build/dist/blab-api/src/app.js",
+  "main": "dist/blab-api/src/app.js",
   "scripts": {
     "serve": "yarn run clean && yarn run build-ts && concurrently \"yarn run watch-ts\" \"yarn run watch-node\"",
-    "watch-node": "nodemon --inspect --inspect-brk ./build/dist/blab-api/src/app.js",
+    "watch-node": "nodemon --inspect ./dist/blab-api/src/app.js",
     "watch-ts": "tsc -w --sourceMap",
     "build-ts": "tsc",
     "migrate-create": "migrate create --compiler \"ts:./migrate/migrate-ts-compiler.js\" -e \".ts\" -t \"./migrate/template.ts\"",
     "migrate-up": "migrate up --compiler \"ts:./migrate/migrate-ts-compiler.js\"",
     "migrate-down": "migrate down --compiler \"ts:./migrate/migrate-ts-compiler.js\"",
-    "clean": "rimraf ./build"
+    "clean": "rimraf ./dist"
   },
   "author": "jccdev",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "mongodb": "3.5.3",
     "ts-node": "8.6.2",
     "typescript": "3.8.2",
-    "uuid": "^7.0.2"
+    "uuid": "7.0.2"
   },
   "devDependencies": {
     "@types/body-parser": "1.19.0",
