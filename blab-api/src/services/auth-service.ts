@@ -1,9 +1,10 @@
 import { UserCommands } from './../data-access/user-commands';
-import { SignUpResponse } from '../../../blab-shared/src/models/sign-up-response';
-import { SignUpForm } from '../../../blab-shared/src/models/sign-up-form';
-import { UserQueries, User } from './../data-access/user-queries';
-import { AuthForm } from '../../../blab-shared/src/models/auth-form';
-import { AuthUser } from '../../../blab-shared/src/models/auth-user';
+import { SignUpResponse } from '../shared/models/sign-up-response';
+import { SignUpForm } from '../shared/models/sign-up-form';
+import { UserQueries } from './../data-access/user-queries';
+import { User } from "../shared/models/user";
+import { AuthForm } from '../shared/models/auth-form';
+import { AuthUser } from '../shared/models/auth-user';
 import crypto from 'crypto';
 
 export class AuthError extends Error {

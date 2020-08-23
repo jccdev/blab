@@ -6,9 +6,9 @@ import {
   useRouteMatch,
   Redirect,
 } from "react-router-dom";
+import BlabChannel from "./BlabChannel";
 import { Channel } from "../shared/models/channel";
 import { ChannelFolder } from "../shared/models/channel-folder";
-import BlabChannel from "./BlabChannel";
 
 const channelDetails = [
   new Channel({ name: "welcome" }),

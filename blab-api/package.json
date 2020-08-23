@@ -5,13 +5,15 @@
   "main": "dist/blab-api/src/app.js",
   "scripts": {
     "serve": "yarn run clean && yarn run build-ts && concurrently \"yarn run watch-ts\" \"yarn run watch-node\"",
-    "watch-node": "nodemon --inspect ./dist/blab-api/src/app.js",
+    "watch-node": "nodemon --inspect ./dist/app.js",
     "watch-ts": "tsc -w --sourceMap",
     "build-ts": "tsc",
     "migrate-create": "migrate create --compiler \"ts:./migrate/migrate-ts-compiler.js\" -e \".ts\" -t \"./migrate/template.ts\"",
     "migrate-up": "migrate up --compiler \"ts:./migrate/migrate-ts-compiler.js\"",
     "migrate-down": "migrate down --compiler \"ts:./migrate/migrate-ts-compiler.js\"",
-    "clean": "rimraf ./dist"
+    "clean": "rimraf ./dist",
+    "symlink-shared": "symlink-dir ../blab-ui/src/shared ./src/shared",
+    "postinstall": "yarn run symlink-shared"
   },
   "author": "jccdev",
   "license": "MIT",
@@ -21,6 +23,7 @@
     "express": "4.17.1",
     "migrate": "1.6.2",
     "mongodb": "3.5.3",
+    "symlink-dir": "4.1.0",
     "ts-node": "8.6.2",
     "typescript": "3.8.2",
     "uuid": "7.0.2"

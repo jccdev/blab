@@ -1,4 +1,4 @@
-import { User } from './user-queries';
+import { User } from "../shared/models/user";
 import { DbFactory } from './db-factory';
 import { v4 as uuidv4 } from 'uuid';
 
