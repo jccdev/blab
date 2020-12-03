@@ -4,7 +4,7 @@
   "description": "Api for blab",
   "main": "dist/blab-api/src/app.js",
   "scripts": {
-    "serve": "yarn run clean && yarn run build-ts && concurrently \"yarn run watch-ts\" \"yarn run watch-node\"",
+    "start": "yarn run clean && yarn run build-ts && concurrently \"yarn run watch-ts\" \"yarn run watch-node\"",
     "watch-node": "nodemon --inspect ./dist/app.js",
     "watch-ts": "tsc -w --sourceMap",
     "build-ts": "tsc",

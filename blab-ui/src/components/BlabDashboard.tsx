@@ -9,6 +9,7 @@ import {
 import BlabChannel from "./BlabChannel";
 import { Channel } from "../shared/models/channel";
 import { ChannelFolder } from "../shared/models/channel-folder";
+import axios from "axios";
 
 const channelDetails = [
   new Channel({ name: "welcome" }),
@@ -82,6 +83,13 @@ const renderChannels = (url: string) => {
 
 function BlabDashboard(): JSX.Element {
   const { path, url } = useRouteMatch();
+
+  // TODO REMOVE
+  // TODO use this to populate channels
+  axios.get("http://localhost:3001/channels").then((x) => {
+    console.log(x);
+  });
+
   return (
     <div>
       <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
