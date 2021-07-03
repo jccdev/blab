@@ -1,9 +1,8 @@
 extends:
   - "eslint:recommended"
-  - "prettier/@typescript-eslint"
   - "plugin:prettier/recommended"
   - "plugin:react/recommended"
-  - "plugin:@typescript-eslint/recommended"
+  - "prettier"
 
 plugins:
   - "@typescript-eslint"
@@ -21,6 +20,8 @@ parserOptions:
 
 rules:
   prettier/prettier: "error"
+  no-unused-vars: "off"
+  "@typescript-eslint/no-unused-vars": "error"
 
 settings:
   react:
@@ -30,3 +31,6 @@ ignorePatterns:
   - '**/*.svg'
   - '**/*.scss'
   - '**/*.css'
+
+globals:
+  JSX: "readonly"
