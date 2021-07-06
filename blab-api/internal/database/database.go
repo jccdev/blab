@@ -1,37 +1,30 @@
 package database
 
 import (
-	"context"
 	"log"
+	"os"
 
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 var (
-	Client *mongo.Client
-	Ctx    context.Context
-	cancel context.CancelFunc
+	Db *sqlx.DB
 )
 
 // Setup _db client and context
 func Setup() {
+	// this Pings the database trying to connect
+	// use sqlx.Open() for sql.Open() semantics
 	var err error
-	Client, err = mongo.NewClient(options.Client().ApplyURI("mongodb://127.0.0.1:27017"))
-	if err != nil {
-		log.Fatal(err)
-	}
+	Db, err = sqlx.Connect("postgres", os.Getenv("BLAB_DB"))
 
-	Ctx, cancel = context.WithCancel(context.Background())
-	err = Client.Connect(Ctx)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 }
 
 // Close _db client and context
 func Close() {
-	log.Println("in close")
-	cancel()
-	Client.Disconnect(Ctx)
+	Db.Close()
 }

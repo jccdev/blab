@@ -1,0 +1,6 @@
+Using Sqlx
+This is the db query library currently in use https://github.com/jmoiron/sqlx.
+
+
+Json/Sql null
+Currently using https://github.com/guregu/null/ to handle the null type conversion from sql/json to go structs
