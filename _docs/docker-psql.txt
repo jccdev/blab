@@ -1,0 +1,29 @@
+// Got info from
+https://towardsdatascience.com/local-development-set-up-of-postgresql-with-docker-c022632f13ea
+
+// To run container
+docker run -d \
+	--name dev-postgres \
+	-e POSTGRES_PASSWORD=test \
+	-v ${HOME}/postgres-data/:/var/lib/postgresql/data \
+        -p 5432:5432 \
+        postgres
+
+// To connect to instance
+docker exec -it dev-postgres bash
+
+// when in container bash
+psql -h localhost -U postgres
+
+// setup go migrations
+go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
+// make sure gopath is added to Path and Env(ex bashrc below)
+export GOPATH=/home/jordan/go/bin
+export PATH=$PATH:/home/jordan/go/bin
+
+// generate migration bash cmd from repo root dir
+migrate create -ext sql -dir _db/migrations -seq {{REPLACE_WITH_MIGRATION_NAME}}
+
+// to run up migrations(ex from repo root)
+migrate -database postgres://postgres:test@localhost:5432/blab?sslmode=disable -path _db/migrations up
